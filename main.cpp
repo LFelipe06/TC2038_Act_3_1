@@ -26,6 +26,55 @@ void printArray(vector<int>& vector){
     cout<<endl;
 }
 
+//QuickSort
+// Particionar el arreglo loco
+int partition(vector<int>& vector, int start, int end)
+{
+    int pivot = vector[start];
+    int count = 0;
+
+    for (int i = start + 1; i <= end; i++) {
+        if (vector[i] <= pivot)
+            count++;
+            QSCounter++;
+    }
+    // Moviendo el pivote a su posición loca
+    int pivotIndex = start + count;
+    swap(vector[pivotIndex], vector[start]);
+ 
+    // Recorrer la derecha e izquierda del arreglo loco
+    int i = start, j = end;
+    while (i < pivotIndex && j > pivotIndex) {
+        while (vector[i] <= pivot) {
+            i++;
+            QSCounter++;
+        }
+        while (vector[j] > pivot) {
+            j--;
+            QSCounter++;
+        }
+        if (i < pivotIndex && j > pivotIndex) {
+            swap(vector[i++], vector[j--]);
+            QSCounter++;
+        }
+    }
+    return pivotIndex;
+}
+ 
+ // Recorrer el arreglo loco
+void quickSort(vector<int>& vector, int start, int end)
+{
+    if (start >= end)
+        return;
+
+    int p = partition(vector, start, end);
+    // recorrer la parte izquierda
+    quickSort(vector, start, p - 1);
+    // recorrer la parte derecha
+    quickSort(vector, p + 1, end);
+}
+
+// HeapSort
 // Para heapizar el array loco
 void heapify(vector<int>& array, int n, int root){
  
@@ -85,6 +134,11 @@ int main(){
     vector<int> quickSortArray = nums;
     vector<int> heapSortArray = nums;
     vector<int> bubbleSortArray = nums;
+
+    // Ordenamiento por Quick Sort
+    quickSort(quickSortArray, 0, size - 1);
+    printArray(quickSortArray);
+    cout<<"Numero de comparaciones Quick Sort: " << QSCounter << endl;
 
     // Ordenamiento por heapSort
     heapSort(heapSortArray);
