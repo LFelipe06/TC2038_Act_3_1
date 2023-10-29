@@ -28,8 +28,7 @@ void printArray(vector<int>& vector){
 
 //QuickSort
 // Particionar el arreglo loco
-int partition(vector<int>& vector, int start, int end)
-{
+int partition(vector<int>& vector, int start, int end){
     int pivot = vector[start];
     int count = 0;
 
@@ -55,15 +54,14 @@ int partition(vector<int>& vector, int start, int end)
         }
         if (i < pivotIndex && j > pivotIndex) {
             swap(vector[i++], vector[j--]);
-            QSCounter++;
+            // QSCounter++;
         }
     }
     return pivotIndex;
 }
  
  // Recorrer el arreglo loco
-void quickSort(vector<int>& vector, int start, int end)
-{
+void quickSort(vector<int>& vector, int start, int end){
     if (start >= end)
         return;
 
@@ -77,7 +75,6 @@ void quickSort(vector<int>& vector, int start, int end)
 // HeapSort
 // Para heapizar el array loco
 void heapify(vector<int>& array, int n, int root){
- 
     int mayor = root;
     int izq = 2 * root + 1;
     int der = 2 * root + 2;
@@ -113,6 +110,19 @@ void heapSort(vector<int>& array){
     }
 }
 
+// Para bubbleOrdenar el array loco
+// Algoritmo consultado de https://www.geeksforgeeks.org/bubble-sort-in-cpp/
+void bubbleSort(vector<int>& array){
+    int n = array.size();
+
+    for(int i = 0; i < n - 1; i++){
+        for(int j = 0; j < n - 1; j++){
+            if(array[j] > array[j + 1]) swap(array[j] , array[j + 1]);
+            BSCounter++;
+        }
+    }
+}
+
 // Funcion main loco
 int main(){
     // Se solicita un valor para opcion
@@ -144,6 +154,11 @@ int main(){
     heapSort(heapSortArray);
     printArray(heapSortArray);
     cout<<"Numero de comparaciones Heap Sort: " << HSCounter << endl;
+    
+    // Ordenamiento por bubbleSort
+    bubbleSort(bubbleSortArray);
+    printArray(bubbleSortArray);
+    cout<<"Numero de comparaciones Bubble Sort: " << BSCounter << endl;
 
     
 
