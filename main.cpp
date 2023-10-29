@@ -98,6 +98,7 @@ void heapify(vector<int>& array, int n, int root){
 }
 
 // Para heapOrdenar el array loco
+// Algoritmo consultado de https://www.geeksforgeeks.org/heap-sort/
 void heapSort(vector<int>& array){
     int n = array.size();
  
