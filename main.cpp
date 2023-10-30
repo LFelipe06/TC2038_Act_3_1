@@ -14,6 +14,7 @@ ofstream output;
 
 // Para llenar el array loco
 void arrayFiller(vector<int>& vector, int x){
+    srand(time(0));
     int value;
     for (int i = 0 ; i < x; i++){
         value = rand() % 100000;
@@ -207,19 +208,21 @@ int main(){
     return 0;
 }
 
-
+// --------------------------
 // ¿Cuál de los tres algoritmos hace, en promedio, menos comparaciones? 
 // En promedio, el algoritmo que hace menos comparaciones es el QuickSort, debido a que es un algoritmo con complejidad nlog(n). 
 // Sin embargo, en el peor de los casos su complejidad cambia a n^2, dependiendo de cómo esté acomodado el pivote, lo que generaría más procesamiento. 
-// En este caso se pude observar
-
+// En este caso se pude observar, como en promedio, el QuickSort es el que realiza menos comparaciones, sin embargo, en comparación del HeapSort, no resulta en tan grande diferencia como con el BubbleSort
+// --------------------------
 // ¿Cómo se relaciona el número de comparaciones con las complejidades asintóticas de cada uno de los algoritmos?
 // Las comparaciones realizadas tienen una relación con las complejidades de los algoritmos, de tal manera entre mayor sea la complejidad, mayor serán las comparaciones realizadas.
-
+// Debido a que la complejidad representa las veces en la que se itera a través de las funciones, por lo que, entre más funciones hayan, mayor serán las comparaciones.
+// --------------------------
 // Ejecuten sus tres algoritmos con arreglos de tamaño 100,000 que ya estén ordenados 
 // (esto es muy fácil de generar, o pueden usar alguno de los arreglos que ya ordenaron). 
 // ¿Cómo se comparan los algoritmos entre sí con los arreglos ordenados?
 //  Realizando una comparación con arreglos arreglos ordenados, se puede observar la diferencia en las comparaciones de los algoritmos. Se observa que mediante el QuickSort, se realizan 50000 comparaciones,
 //  mediante el HeapSort se realizan 2303212 comparaciones y finalmente para el BubbleSort se realizan más de mil millones de comparaciones. 
-// 
+// Esta visualización, muestra el mejor de los casos en los algoritmos, debido a que ya están arreglados y se realizan muchas menos iteraciones. Mediante esta, podemos ver la efectividad de los algoritmos como el quicksort y,
+// en otros algoritmos, sin embargo, en el bubbleSort se puede observar la poca efectividad, ya que recorre el arreglo hasta acomodar un solo elemento.
 
