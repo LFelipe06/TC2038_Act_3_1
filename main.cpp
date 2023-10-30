@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 using namespace std;
 
@@ -8,6 +9,8 @@ using namespace std;
 int QSCounter = 0;
 int HSCounter = 0;
 int BSCounter = 0;
+
+ofstream output;
 
 // Para llenar el array loco
 void arrayFiller(vector<int>& vector, int x){
@@ -18,11 +21,21 @@ void arrayFiller(vector<int>& vector, int x){
     }
 }
 
+// Llenar el array loco en orden del 0 al 100,000
+void arrayFillerInOrder(vector<int>& vector) {
+    int value;
+    for (int i = 0 ; i <= 100000; i++){
+        vector.push_back(i);
+    } 
+}
+
 // Para imprimir el array loco
 void printArray(vector<int>& vector){
     for (int i=0; i < vector.size(); i ++){
         cout<<vector[i]<<" ";
+        output << vector[i] << " ";
     }
+    output << endl;
     cout<<endl;
 }
 
@@ -35,7 +48,7 @@ int partition(vector<int>& vector, int start, int end){
     for (int i = start + 1; i <= end; i++) {
         if (vector[i] <= pivot)
             count++;
-            QSCounter++;
+            // QSCounter++;
     }
     // Moviendo el pivote a su posición loca
     int pivotIndex = start + count;
@@ -54,7 +67,7 @@ int partition(vector<int>& vector, int start, int end){
         }
         if (i < pivotIndex && j > pivotIndex) {
             swap(vector[i++], vector[j--]);
-            // QSCounter++;
+            QSCounter++;
         }
     }
     return pivotIndex;
@@ -92,7 +105,7 @@ void heapify(vector<int>& array, int n, int root){
  
     if (mayor != root) {
         swap(array[root], array[mayor]);
- 
+        // HSCounter++;
         heapify(array, n, mayor);
     }
 }
@@ -126,6 +139,8 @@ void bubbleSort(vector<int>& array){
 
 // Funcion main loco
 int main(){
+    output.open("output.txt");
+
     // Se solicita un valor para opcion
     int option;
     cout<<"Selecciona el tamaño del arreglo por ordenar: \n1. 10 elementos\n2. 100 elementos\n3. 1,000 elementos\n4. 10,000 elementos\n5. 100,000 elementos\nSeleccion: ";
@@ -145,23 +160,66 @@ int main(){
     vector<int> quickSortArray = nums;
     vector<int> heapSortArray = nums;
     vector<int> bubbleSortArray = nums;
-
     // Ordenamiento por Quick Sort
     quickSort(quickSortArray, 0, size - 1);
-    printArray(quickSortArray);
     cout<<"Numero de comparaciones Quick Sort: " << QSCounter << endl;
 
     // Ordenamiento por heapSort
     heapSort(heapSortArray);
-    printArray(heapSortArray);
     cout<<"Numero de comparaciones Heap Sort: " << HSCounter << endl;
     
     // Ordenamiento por bubbleSort
     bubbleSort(bubbleSortArray);
-    printArray(bubbleSortArray);
     cout<<"Numero de comparaciones Bubble Sort: " << BSCounter << endl;
+    output <<"Numero de comparaciones Quick Sort: " << QSCounter << endl;
+    output <<"Numero de comparaciones Heap Sort: " << HSCounter << endl;
+    output <<"Numero de comparaciones Bubble Sort: " << BSCounter << endl;
+    printArray(bubbleSortArray);
 
+    // // Correr el arreglo de 0 a 100,000 ya ordenado
+    // // Inicializacion y llenado del vector original
+    // vector<int> order;
+    // arrayFillerInOrder(order);
+
+    // // Copias del vector original, para no sobre escribirlo
+    // vector<int> quickSortArray = order;
+    // vector<int> heapSortArray = order;
+    // vector<int> bubbleSortArray = order;
+
+    // // Ordenamiento por QuickSort
+    // quickSort(quickSortArray, 0, 100001);
+    // cout<<"Numero de comparaciones Quick Sort: " << QSCounter << endl;
+
+    // // Ordenamiento por heapSort
+    // heapSort(heapSortArray);
+    // cout<<"Numero de comparaciones Heap Sort: " << HSCounter << endl;
     
+    // // Ordenamiento por bubbleSort
+    // bubbleSort(bubbleSortArray);
+    // cout <<"Numero de comparaciones Bubble Sort: " << BSCounter << endl;
+    // output <<"Numero de comparaciones Quick Sort: " << QSCounter << endl;
+    // output <<"Numero de comparaciones Heap Sort: " << HSCounter << endl;
+    // output <<"Numero de comparaciones Bubble Sort: " << BSCounter << endl;
+    // printArray(heapSortArray);
 
+
+    output.close();
     return 0;
 }
+
+
+// ¿Cuál de los tres algoritmos hace, en promedio, menos comparaciones? 
+// En promedio, el algoritmo que hace menos comparaciones es el QuickSort, debido a que es un algoritmo con complejidad nlog(n). 
+// Sin embargo, en el peor de los casos su complejidad cambia a n^2, dependiendo de cómo esté acomodado el pivote, lo que generaría más procesamiento. 
+// En este caso se pude observar
+
+// ¿Cómo se relaciona el número de comparaciones con las complejidades asintóticas de cada uno de los algoritmos?
+// Las comparaciones realizadas tienen una relación con las complejidades de los algoritmos, de tal manera entre mayor sea la complejidad, mayor serán las comparaciones realizadas.
+
+// Ejecuten sus tres algoritmos con arreglos de tamaño 100,000 que ya estén ordenados 
+// (esto es muy fácil de generar, o pueden usar alguno de los arreglos que ya ordenaron). 
+// ¿Cómo se comparan los algoritmos entre sí con los arreglos ordenados?
+//  Realizando una comparación con arreglos arreglos ordenados, se puede observar la diferencia en las comparaciones de los algoritmos. Se observa que mediante el QuickSort, se realizan 50000 comparaciones,
+//  mediante el HeapSort se realizan 2303212 comparaciones y finalmente para el BubbleSort se realizan más de mil millones de comparaciones. 
+// 
+
