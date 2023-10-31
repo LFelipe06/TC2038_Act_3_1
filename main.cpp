@@ -24,7 +24,6 @@ void arrayFiller(vector<int>& vector, int x){
 
 // Llenar el array loco en orden del 0 al 100,000
 void arrayFillerInOrder(vector<int>& vector) {
-    int value;
     for (int i = 0 ; i <= 100000; i++){
         vector.push_back(i);
     } 
@@ -92,18 +91,14 @@ void heapify(vector<int>& array, int n, int root){
     int mayor = root;
     int izq = 2 * root + 1;
     int der = 2 * root + 2;
- 
-    if (izq < n && array[izq] > array[mayor]){
-        mayor = izq;
-        HSCounter++;
-    }
- 
-    if (der < n && array[der] > array[mayor]){
-        mayor = der;
-        HSCounter++;
-    }
-        
- 
+    
+    HSCounter++;
+    if (izq < n && array[izq] > array[mayor]) mayor = izq;
+    
+    HSCounter++;
+    if (der < n && array[der] > array[mayor]) mayor = der;
+
+    HSCounter++;
     if (mayor != root) {
         swap(array[root], array[mayor]);
         // HSCounter++;
@@ -132,8 +127,8 @@ void bubbleSort(vector<int>& array){
 
     for(int i = 0; i < n - 1; i++){
         for(int j = 0; j < n - 1; j++){
-            if(array[j] > array[j + 1]) swap(array[j] , array[j + 1]);
             BSCounter++;
+            if(array[j] > array[j + 1]) swap(array[j] , array[j + 1]);
         }
     }
 }
