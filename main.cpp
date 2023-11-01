@@ -191,7 +191,7 @@ int main(){
     BSCounter = 0;
 
     // Ordenamiento por QuickSort en un arreglo ordenado
-    quickSort(quickSortArray, 0, 100001);
+    quickSort(quickSortArray, 0, 100000);
     cout<<"Numero de comparaciones Quick Sort en un arreglo ordenado: " << QSCounter << endl;
 
     // Ordenamiento por heapSort en un arreglo ordenado
@@ -258,8 +258,10 @@ int main(){
 // Ejecuten sus tres algoritmos con arreglos de tamaño 100,000 que ya estén ordenados 
 // (esto es muy fácil de generar, o pueden usar alguno de los arreglos que ya ordenaron). 
 // ¿Cómo se comparan los algoritmos entre sí con los arreglos ordenados?
-//  Realizando una comparación con arreglos arreglos ordenados, se puede observar la diferencia en las comparaciones de los algoritmos. Se observa que mediante el QuickSort, se realizan 50000 comparaciones,
-//  mediante el HeapSort se realizan 1700886 comparaciones y finalmente para el BubbleSort se realizan más de mil millones de comparaciones. 
-// Esta visualización, muestra el mejor de los casos en los algoritmos, debido a que ya están arreglados y se realizan muchas menos iteraciones. Mediante esta, podemos ver la efectividad de los algoritmos como el quicksort y,
-// en otros algoritmos, sin embargo, en el bubbleSort se puede observar la poca efectividad, ya que recorre el arreglo hasta acomodar un solo elemento.
+// Mediante la realización de los arreglos ordenados, se puede observar cómo el número de comparaciones supera el millón, debido a que se está tratando con un arreglo de 100,000.
+// El BubbleSort supera los mil millones de comparaciones, el QuickSort supera los 700 millones y finalmente el heapSort supera los 3 millones. 
+// Mediante el quickSort se puede observar que el acomodo del pivote probablemente no sea el óptimo y resulte en un peor caso, generando casi la mitad de comparaciones que el BubbleSort.
+// De otra manera, el HeapSort resulta en el algoritmo más eficaz para el "ordenamiento" de arreglos ya ordenados. 
+// De manera general, resulta más práctico utilizar el algoritmo QuickSort para el ordenamiento de pocos elementos, sin embargo, para un ordenamiento como el de 100,000 elementos, 
+// puede resultar más efectivo utilizar el HeapSort, debido a que en muchas ocasiones resultará menor al quickSort y resulta en un algoritmo más constante en sus comparaciones.
 
