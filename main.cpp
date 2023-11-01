@@ -46,9 +46,9 @@ int partition(vector<int>& vector, int start, int end){
     int count = 0;
 
     for (int i = start + 1; i <= end; i++) {
+        QSCounter++;
         if (vector[i] <= pivot)
             count++;
-            // QSCounter++;
     }
     // Moviendo el pivote a su posición loca
     int pivotIndex = start + count;
@@ -59,15 +59,19 @@ int partition(vector<int>& vector, int start, int end){
     while (i < pivotIndex && j > pivotIndex) {
         while (vector[i] <= pivot) {
             i++;
+            // Cada que se cumple la comparación del while se incrementa el contador
             QSCounter++;
         }
+
         while (vector[j] > pivot) {
             j--;
             QSCounter++;
         }
+
+        // Comparación de indices, no se suma al contador
         if (i < pivotIndex && j > pivotIndex) {
             swap(vector[i++], vector[j--]);
-            QSCounter++;
+            // QSCounter++;
         }
     }
     return pivotIndex;
@@ -92,11 +96,12 @@ void heapify(vector<int>& array, int n, int root){
     int izq = 2 * root + 1;
     int der = 2 * root + 2;
     
+    // Para cada comparación se incrementa el contador, aunque no se cumpla el estatuto if
+    HSCounter++;
     if (izq < n && array[izq] > array[mayor]) mayor = izq;
-    
+    HSCounter++;
     if (der < n && array[der] > array[mayor]) mayor = der;
     
-    HSCounter++;
     if (mayor != root) {
         swap(array[root], array[mayor]);
         // HSCounter++;
@@ -125,6 +130,7 @@ void bubbleSort(vector<int>& array){
 
     for(int i = 0; i < n - 1; i++){
         for(int j = 0; j < n - 1; j++){
+            // Para cada comparación del if se suma el contador
             BSCounter++;
             if(array[j] > array[j + 1]) swap(array[j] , array[j + 1]);
         }
@@ -134,12 +140,6 @@ void bubbleSort(vector<int>& array){
 // Funcion main loco
 int main(){
     output.open("output.txt");
-
-    // int optionInOrder;
-    // cout << "Selecciona el tipo de arreglo: \n1. Ordenado \n2. Desordenado";
-    // cin >> optionInOrder;
-
-    // if (option == 1)
 
     // Se solicita un valor para opcion
     int option;
@@ -224,24 +224,24 @@ int main(){
 // ¿Cuál de los tres algoritmos hace, en promedio, menos comparaciones? 
 // Para obtener el promedio, es necesario correr el programa varias veces comparando los resultados con las diferentes corridas y diferentes tamaños de arreglos. Obtuvimos los siguientes resultados:
 // Seleccion: 10 elementos
-// Numero de comparaciones Quick Sort: 12
-// Numero de comparaciones Heap Sort: 32
+// Numero de comparaciones Quick Sort: 31
+// Numero de comparaciones Heap Sort: 60
 // Numero de comparaciones Bubble Sort: 81
 // Seleccion: 100 elementos
-// Numero de comparaciones Quick Sort: 383
-// Numero de comparaciones Heap Sort: 632
+// Numero de comparaciones Quick Sort: 847
+// Numero de comparaciones Heap Sort: 1260
 // Numero de comparaciones Bubble Sort: 9801
 // Seleccion: 1,000
-// Numero de comparaciones Quick Sort: 8295
-// Numero de comparaciones Heap Sort: 9512
+// Numero de comparaciones Quick Sort: 21209
+// Numero de comparaciones Heap Sort: 19160
 // Numero de comparaciones Bubble Sort: 998001
 // Seleccion: 10,000
-// Numero de comparaciones Quick Sort: 115438
-// Numero de comparaciones Heap Sort: 129210
+// Numero de comparaciones Quick Sort: 245713
+// Numero de comparaciones Heap Sort: 258522
 // Numero de comparaciones Bubble Sort: 99980001
 // Seleccion: 100,000
-// Numero de comparaciones Quick Sort: 1440422
-// Numero de comparaciones Heap Sort: 1625082
+// Numero de comparaciones Quick Sort: 3127129
+// Numero de comparaciones Heap Sort: 3250176
 // Numero de comparaciones Bubble Sort: 1409865409
 // En promedio, el algoritmo que hace menos comparaciones es el QuickSort, debido a que es un algoritmo con complejidad nlog(n). 
 // Sin embargo, en el peor de los casos su complejidad cambia a n^2, dependiendo de cómo esté acomodado el pivote, lo que generaría mayor procesamiento. 
